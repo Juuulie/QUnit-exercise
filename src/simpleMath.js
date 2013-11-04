@@ -1,9 +1,7 @@
 SimpleMath = function(){
-	// todo
 };
 
 SimpleMath.prototype.getFactorial = function (number){
-	// todo
 	if(number<0){
 		throw new Error ("There is no factorial for negative number");
 	}else{
@@ -14,13 +12,9 @@ SimpleMath.prototype.getFactorial = function (number){
 		};
 		return fact;
 	}
-
-
 };
 
 SimpleMath.prototype.signum = function (number){
-	// todo
-
 	if(number>0){
 		return 1;
 	}else if(number<0){
