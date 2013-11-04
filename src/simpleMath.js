@@ -4,8 +4,6 @@ SimpleMath = function(){
 
 SimpleMath.prototype.getFactorial = function (number){
 	// todo
-	//return (number==1)?1:number*this.getFactorial(number-1);
-	//console.log(number);
 	if(number<0){
 		throw new Error ("There is no factorial for negative number");
 	}else{
@@ -22,8 +20,16 @@ SimpleMath.prototype.getFactorial = function (number){
 
 SimpleMath.prototype.signum = function (number){
 	// todo
+
+	if(number>0){
+		return 1;
+	}else if(number<0){
+		return -1;
+	}else{
+		return 0;
+	}
 };
 
 SimpleMath.prototype.average = function (number1, number2){
-
+	return (number1+number2)*0.5;
 };
