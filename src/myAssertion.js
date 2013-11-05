@@ -27,7 +27,5 @@ function isPrime(number, message){
 	}
 	// nb premier
 	QUnit.push(true, true, expected, message);
-	return;
-
 
 }

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Underscore test</title>
+
+	<link rel="stylesheet" href="vendor/qunit-1.12.0.css">	
+	<script src="vendor/jquery-1.10.2.min.js"></script>	
+	<script src="vendor/underscore-min.js"></script>
+
+</head>
+<body>
+	<!-- pour afficher les tests -->
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+
+	<script src="vendor/qunit-1.12.0.js"></script>
+	<script>
+	
+
+	var isSorted = function(array, message){
+
+		QUnit.push(_.every(array, function (value, index, array){
+			return index === 0 || String(array[index - 1]) <= value;
+		}), true, true, message);
+
+
+		// pareil que
+
+		// var isSorted = _.every(array, function(value, index, array){
+		// 	return index === 0 || String(array[index - 1]) <= String(value)
+		// })
+		// if(isSorted === true){
+		// 	QUnit.push(true);
+		// }else{
+		// 	QUnit.push(false);
+		// }
+
+
+	};
+
+	test('sorted ?', function(){
+		isSorted([1,4,5], 'le tableau est trié');
+		isSorted([1,4,8,5], "le tableau n'est pas trié");
+	});
+
+	// function isSorted(tableau){
+	//         return _.every(tableau,function(value,key,list){
+	//                 if (key == 0){
+	//                         return true;
+	//                 }
+	//                 if (list[key-1]<list[key]) {
+	//                          return true;
+	//                 }else{
+	//                          return false;
+	//                 }
+	//         })
+	// }
+	//console.log(isSorted([1,4,5]));
+
+	</script>
+</body>
+</html>

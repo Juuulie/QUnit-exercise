@@ -23,3 +23,15 @@ test('isPrime', function(){
 	isPrime(8, 'is prime ?');
 	isPrime(7, 'is prime ?');
 });
+
+
+test('test', function(){
+	stop(); // sortie du callback
+	nom = 'Julie';
+	window.setTimeout(function() {
+		start();
+		nom = 'Arthur';
+		equal(nom,'Arthur', "it's ok !");
+		
+	}, 3000 );
+})

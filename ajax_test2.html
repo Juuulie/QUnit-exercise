@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax test</title>
+
+	<link rel="stylesheet" href="vendor/qunit-1.12.0.css">	
+	<script src="vendor/jquery-1.10.2.min.js"></script>	
+	<script src="vendor/underscore-min.js"></script>	
+	<script src="vendor/backbone-min.js"></script>	
+
+</head>
+<body>
+	<!-- pour afficher les tests -->
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+
+	<script src="vendor/qunit-1.12.0.js"></script>
+
+	<script>
+
+		module('Test for the collection', {
+			setup: function(){
+				// you have to create the collection here
+				var MyCollection = Backbone.Collection.extend({}); // global
+				this.myCollection = new MyCollection();
+			},
+			teardown: function(){
+				// you can delete the collection
+				delete myCollection;
+			},
+			addPersons: function(response){
+				// you can add the object to the collection
+				this.myCollection.add(response);
+				console.log(this.myCollection);
+			},
+			getNumber: function(pos) {
+				// look to 'collection.where' look to backbone docs
+				return this.myCollection.where({position: pos}).length;
+
+			},
+
+			successCallback: function(response){
+
+				this.addPersons(response);
+
+				var num_managers = this.getNumber('Manager');
+				var num_directors = this.getNumber('Director');
+				var num_students = this.getNumber('Student');
+
+				console.log(num_managers);
+				console.log(num_directors);
+				console.log(num_students);
+
+
+				
+				
+				expect(3);
+				// verify we have at least one manager				
+				ok((num_managers>=1), 'au moins 1 manager')
+				// verify we have at least one director
+				ok((num_directors>=1), 'au moins 1 directeur')
+				// verify we have at least three student
+				ok((num_students>=3), 'au moins 3 étudiants')
+
+
+				// hints: use "collection.where" (backbone docs)
+
+
+
+				// (num_managers>=1) ? ok(true, 'au moins 1 manager') : ok(false, "moins d'1 manager");
+				// (num_directors>=1) ? ok(true, 'au moins 1 directeur') : ok(false, "moins d'1 directeur");
+				// (num_students>=3) ? ok(true, 'au moins 3 étudiants') : ok(false, "moins de 3 étudiants");
+
+				start();
+			}
+
+		})
+
+		QUnit.config.testTimeout = 1000;
+
+		asyncTest('Making a REAL Ajax testing', function(){
+
+			_.bindAll(this, 'getNumber', 'successCallback');
+
+
+			$.ajax({
+				type: 'GET',
+				dataType: 'json',				
+				url: "php/json_data_combo2.php",
+				success : this.successCallback
+				
+			});		
+
+		});
+	
+
+	</script>	
+</body>
+</html>
